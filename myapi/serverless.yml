@@ -1,0 +1,18 @@
+service: myapi-service
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.11
+  stage: dev
+  region: us-east-1
+  timeout: 10
+
+functions:
+  AddNumbers:
+    handler: add.lambda_handler
+    timeout: ${self:provider.timeout}
+    events:
+      - http:
+          path: /add
+          method: get
